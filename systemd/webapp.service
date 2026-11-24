@@ -1,0 +1,14 @@
+[Unit]
+Description=Demo shop web app (gunicorn)
+After=network.target
+
+[Service]
+User=webapp
+Group=webapp
+WorkingDirectory=/opt/webapp
+Environment=WEBAPP_LOG=/var/log/webapp/app.log
+ExecStart=/opt/webapp/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:5000 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
